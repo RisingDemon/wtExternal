@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- index1.php -->
+        <!DOCTYPE html>
+        <html>
+        <title>sessions</title>
+
+        </html>
+
+        <body>
+            <form action="signIn.php" method="post">
+                <label>Enter username: </label>
+                <input name="usname" type="text"></input><br>
+                <label>Enter password: </label>
+                <input name="pass" type="text"></input>
+                <button>Submit</button>
+            </form>
+
+            <?php
+
+?>
+
+            <form action="access.php">
+                <button type="submit">access</button>
+            </form>
+            <form action="signOut.php">
+                <button type="submit">signOut</button>
+            </form>
+        </body>
+
+        <!-- access.php -->
+        <!DOCTYPE html>
+        <html>
+        <title>sessions</title>
+
+        </html>
+
+        <?php
+session_start();
+if (isset($_SESSION['name2'])) {
+    echo "we are currently in the session";
+    echo "<br>User: " . $_SESSION['name2'] . "<br>" . "Password: " . $_SESSION['password2'];
+} else
+    echo "please login to continue";
+
+?>
+        <form action="signOut.php">
+            <button type="submit">signOut</button>
+        </form>
+
+        <body>
+
+            <!-- signIn.php -->
+            <!DOCTYPE html>
+            <html>
+            <title>sessions</title>
+
+            </html>
+
+            <body>
+
+                <?php
+if($_SERVER['REQUEST_METHOD']=="POST"){
+
+    session_start();
+    $name = $_POST['usname'];
+    $pass = $_POST['pass'];
+    $_SESSION['name2'] = $name;
+    $_SESSION['password2'] = $pass;
+    echo "we have started the session";
+}
+?>
+                <form action="access.php">
+                    <button type="submit">access</button>
+                </form>
+                <form action="signOut.php">
+                    <button type="submit">signOut</button>
+                </form>
+            </body>
+
+
+            <!-- signOut.php -->
+            <?php
+    session_start();
+    session_unset();
+    session_destroy();
+if(isset($_SESSION['name2'])){
+
+    echo "You have been logged out successfully";
+} else
+    echo "You first have to login to logout";
+
+?>
+    </xmp>
+</body>
+
+</html>

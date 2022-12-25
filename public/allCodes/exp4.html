@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+
+    <!-- implementation of inheritance in php -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PHP Inheritance</title>
+</head>
+
+<body>
+    <?php
+class A
+{
+    public $a;
+    public $b;
+    public function __construct($a, $b)
+    {
+        $this->a = $a;
+        $this->b = $b;
+    }
+    public function add()
+    {
+        return $this->a + $this->b;
+    }
+}
+class B extends A
+{
+    public $c;
+    public function __construct($a, $b, $c)
+    {
+        parent::__construct($a, $b);
+        $this->c = $c;
+    }
+    public function mul()
+    {
+        return $this->a * $this->b * $this->c;
+    }
+}
+$obj1 = new A(10, 20);
+echo "The sum of 10 and 20 is: ";
+echo $obj1->add();
+echo "<br>";
+$obj2 = new B(10, 20, 30);
+echo "The product of 10,20 and 30 is: ";
+echo $obj2->mul();
+?>
+</body>
+
+</html>
+
+    <xmp>
+
+<body>
+
+</html>

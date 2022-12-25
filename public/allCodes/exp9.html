@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- index1.php -->
+        <!DOCTYPE html>
+<html>
+
+<head>
+    <title>index</title>
+</head>
+
+<body>
+    <form action="setCookies.php" method="get">
+        <label for="cars">Choose a car:</label>
+
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+        <button type="submit">Enter</button>
+    </form>
+
+</body>
+
+</html>
+
+<!-- getCookies.php -->
+<?php
+echo "Cookie Data: " . $_COOKIE['choice'];
+?>
+
+<!-- setCookies.php -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>set cookies</title>
+</head>
+
+<body>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        $sel = $_GET['cars'];
+    }
+    setcookie("choice", $sel);
+    ?>
+
+    <form action="getCookie.php">
+        <label>click to see the cookie set by you</label>
+        <button type="submit">Enter</button>
+    </form>
+</body>
+
+</html>
+
+    </xmp>
+</body>
+</html>

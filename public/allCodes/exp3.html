@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- php array with 5 different functions -->
+        <!DOCTYPE html>
+        <html>
+
+        <head>
+            <title>PHP Array</title>
+        </head>
+
+        <body>
+            <?php
+$arr= array("one","two","three","four","five");
+echo "The array is: ";
+print_r($arr);
+// count function
+echo "<br>The number of elements in the array is: ";
+echo count($arr);
+// sort function
+echo "<br>The sorted array is: ";
+sort($arr);
+print_r($arr);
+// reverse function
+echo "<br>The reversed array is: ";
+rsort($arr);
+print_r($arr);
+// shuffle function
+echo "<br>The shuffled array is: ";
+shuffle($arr);
+print_r($arr);
+// implode function
+echo "<br>The array is after implode: ";
+$imp=implode(" ",$arr);
+echo $imp;
+// explode function
+echo "<br>The array is after explode: ";
+$exp=explode(" ",$imp);
+print_r($exp);
+?>
+
+    </xmp>
+
+</body>
+
+</html>
