@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <?php
+$ages= array("Peter"=>40,"meg"=>13,"stewie"=>2,"Quagmier"=>39);
+print_r($ages);
+foreach($ages as $value)
+{
+    echo "$value<br>";
+}
+echo"<br>";
+//1 fuction count no of elements
+echo"Size of array".count($ages);
+print_r($ages);
+echo"<br>";
+//2 function to count frequency of elements
+$freq=array_count_values($ages);
+print_r($freq);
+echo"<br>";
+//3 determine unique val
+$uniq= array_unique($ages);
+print_r($uniq);
+echo"<br>";
+//4 combine 2 array
+$clo=array(0=>11,6=>46,5=>7,1=>8);
+$com= array_combine($ages,$clo);
+print_r($com);
+echo"<br>";
+//5 adding array values
+$total=array_sum($clo);
+echo "$total<br>";
+//6 sort array
+sort($clo);
+print_r($clo);
+?>
+    </xmp>
+</body>
+
+</html>

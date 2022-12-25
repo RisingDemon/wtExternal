@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- form html -->
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <title>Form</title>
+            <link rel="stylesheet" href="style.css" />
+        </head>
+
+        <body>
+            <div class="headNav">
+                <!-- <div class="logo"> -->
+                <!-- <img src="clgLogo.jpeg" alt="logo" width="100" height="100" /> -->
+                <!-- </div> -->
+                <div class="nav">
+                    <h2 id="clgForm">COLLEGE FORM</h2>
+                </div>
+            </div>
+            <form action="">
+                <div id="center1">
+                    <div class="titles">Personal Details</div>
+                    <div class="flCombo">
+                        <label class="fname astrk" for="fname">First Name: </label>
+                        <input class="fname" id="fnameIp" type="text" required />
+                        <div id="lastName">
+                            <label class="lname astrk" for="lname">Last Name: </label>
+                            <input class="lname" id="lnameIp" type="text" required /><br />
+                        </div>
+                        <label for="phone" class="astrk">Phone no: </label>
+                        <input type="text" pattern="[0-9]{10}" required /><br />
+                        <label for="bdate" class="astrk">Date of Birth: </label>
+                        <input type="date" /><br />
+                    </div>
+                </div>
+                <hr />
+                <div id="center2">
+                    <div class="titles">Address</div>
+                    <div class="addressCombo">
+                        <label for="add1" class="astrk">Street address: </label>
+                        <input type="text" required /><br />
+                        <label for="add2">Street address2: </label>
+                        <input type="text" /><br />
+                        <label for="city" class="astrk"> City: </label>
+                        <input type="text" required /><br />
+                        <label for="state" class="astrk">State: </label>
+                        <input type="text" required /><br />
+                        <label for="country" class="astrk">Country: </label>
+                        <input type="text" required /><br />
+                        <label for="pin" class="astrk">Pin code: </label>
+                        <input type="text" pattern="[0-9]{6}" /><br />
+                    </div>
+                </div>
+                <hr />
+                <div id="center3">
+                    <div class="titles">College Details</div>
+                    <div class="clgCombo">
+                        <label class="left astrk" for="prn">PRN no: </label>
+                        <input class="left" type="text" pattern="[0-9]{10}" required /><br />
+                        <label for="clg">College</label>
+                        <select name="clg" class="clgSelect">
+                            <option value="dypcet">
+                                D.Y.Patil college of Engineering and technology kasba bawada
+                                kolhapur
+                            </option>
+                            <option value="kit">Kolhapur Institute of technology</option>
+                            <option value="bharti">bhartiya vidya peeth</option>
+                            <option value="dot">Department of technoloy</option>
+                        </select><br />
+                        <label for="mail" class="astrk">Email address: </label>
+                        <input type="email" required /><br />
+                    </div>
+                </div>
+                <hr />
+                <div class="cmtArea">
+                    <textarea name="" id="" cols="30" rows="10">Comments: </textarea>
+                </div>
+                <button id="submitBtn">Submit</button>
+            </form>
+            <!-- <script src="script.js"></script> -->
+        </body>
+
+        </html>
+
+        <!-- form css -->
+        .astrk:before{
+        content:"*" ;
+        color:red
+        }
+        form{
+        background-color: ghostwhite;
+        /* text-align: center; */
+        }
+        label{
+        margin: 5px;
+        font-family: 'Abyssinica SIL', serif;
+        }
+        input{
+        margin: 10px;
+        border-radius: 7px;
+        height: 27px;
+        }
+        select{
+        margin: 10px;
+        height: 27px;
+        }
+
+        .headNav{
+        display: flex;
+        background-color: lightcyan;
+        }
+        .logo{
+        float: left;
+        margin: 10px;
+        }
+
+        .flCombo, .addressCombo, .clgCombo, .cmtArea{
+        margin-left: 30%;
+        }
+        .titles{
+        margin-left: 4%;
+        font-family: 'Abyssinica SIL', serif;
+        font-size: 17px;
+        font-weight: 600
+        }
+        #submitBtn{
+        display: block;
+        border-radius: 3px;
+        margin-left: 72%;
+        }
+        .nav{
+        font-size: 21px;
+        margin-left: 21%;
+        margin-top: 17px;;
+        }
+
+    </xmp>
+</body>
+
+</html>

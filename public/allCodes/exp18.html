@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Delete Roll no</title>
+        </head>
+
+        <body>
+
+            <?php
+        $sever="localhost";
+        $user="root";
+        $pass="";
+        $database="student";
+
+        $conn= new mysqli($sever,$user,$pass,$database);
+        if($_SERVER['REQUEST_METHOD']=='POST')
+        {
+            $rollno=$_POST['rollno'];
+            $sql ="DELETE FROM stud WHERE `stud`.`rollNo` = $rollno";
+            $result=mysqli_query($conn,$sql);
+            if($result)
+            {
+                echo"<script>alert('Data Deleted Successfully')</script>";
+            }
+        }
+    ?>
+            <form action="index.php" method="post">
+                <label for="rollno">RollNo:</label>
+                <input type="text" name="rollno">
+                <input type="submit" value="Delete">
+            </form>
+        </body>
+
+        </html>
+    </xmp>
+</body>
+
+</html>
