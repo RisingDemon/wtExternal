@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- index.js server -->
+        import express from "express";
+        const app = express();
+        app.use(express.static("public"));
+        app.use(express.json());
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+        });
+
+        app.post("/api/studInfo", studInfoRoutes);
+
+        <!-- index.js -->
+        import { classInfoSend } from "./api/classInfoApi.js";
+
+        const btn = document.querySelector("#optSel");
+        btn.addEventListener("click", () => {
+        const selectElement = document.querySelector("#sDiv");
+        const getDiv = selectElement.value;
+        const selectElement2 = document.querySelector("#sSub");
+        const getSub = selectElement2.value;
+        let classInfo = {
+        div: getDiv,
+        sub: getSub,
+        };
+        console.log(classInfo);
+        classInfoSend(classInfo);
+        });
+
+        <!-- api -->
+        async function classInfoSend(classInfo){
+        const arg ={
+        method:'POST',
+        headers:{
+        'Content-Type':'application/json'
+        },
+        body:JSON.stringify(classInfo)
+        };
+        try{
+        console.log('sending');
+        const response = await fetch('/teachersDashboard/teacher',arg);
+        const result = await response.json();
+        console.log(result);
+        if(result.code===200){
+        alert('Success');
+        window.location.href=`../studentList/?token=${classInfo.div}_${classInfo.sub}`;
+        }
+        else if(result.code===500){
+        alert('could not create table');
+        }
+        else{
+        alert('Error');
+        }
+        }
+        catch(err){
+        console.log(err);
+        }
+        }
+        export {classInfoSend};
+
+        <!-- routes -->
+        import { connection } from "../database.js";
+        const getTeachInfo = (request, response) => {
+        // const teachInfo = request.body;
+        const { email, password } = request.body;
+        console.log("in routes");
+        }
+
+    </xmp>
+</body>
+
+</html>

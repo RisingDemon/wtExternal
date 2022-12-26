@@ -50,6 +50,10 @@ const btn15 = document.getElementById("btn15");
 btn15.addEventListener("click", function () {
     window.location.href = `./allCodes/exp15.html`;
 });
+const btn16 = document.getElementById("btn16");
+btn16.addEventListener("click", function () {
+    window.location.href = `./allCodes/exp16.html`;
+});
 const btn17 = document.getElementById("btn17");
 btn17.addEventListener("click", function () {
     window.location.href = `./allCodes/exp17.html`;
