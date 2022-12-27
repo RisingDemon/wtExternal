@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+        mysql> select *from locations; 
+        +-------+---------+-------+---------
+        +
+        | locid | city | state | country |
+        +-------+---------+-------+---------
+        +
+        | 1 | madison | W1 | USA |
+        | 2 | fresno | CA | USA |
+        | 5 | Chennai | TN | India | 
+        +-------+---------+-------+---------
+        +
+        3 rows in set (0.00 sec)
+         insert into sales values(12,3,1,50);
+         insert into sales values(11,1,2,35);
+         insert into sales values(11,2,2,22);
+         insert into sales values(11,3,2,10);
+         insert into sales values(12,1,2,26);
+         insert into sales values(12,2,2,45);
+         insert into sales values(12,3,2,20);
+         insert into sales values(13,1,2,20);
+         insert into sales values(13,2,2,40);
+         insert into sales values(13,3,2,5);
+        mysql> select *from sales; 
+        +------+--------+-------+-------
+        +
+        | pid | timeid | locid | sales | 
+        +------+--------+-------+-------
+        +
+        | 11 | 1 | 1 | 25 |
+        | 11 | 2 | 1 | 8 |
+        | 11 | 3 | 1 | 15 |
+        | 12 | 1 | 1 | 30 |
+        | 12 | 2 | 1 | 20 |
+        | 13 | 1 | 1 | 8 |
+        | 13 | 2 | 1 | 10 |
+        | 13 | 3 | 1 | 10 |
+    
+        mysql> select *from products;
+        +------+-----------+------------+-------+
+        | pid | pname | category | price |
+        +------+-----------+------------+-------+
+        | 11 | Lee Jeans | Apparel1 | 25 |
+        | 12 | Zord | Toys | 18 |
+        | 13 | Biro Pen | Stationary | 2 |
+        +------+-----------+------------+-------+
+        3 rows in set (0.00 sec)
+        mysql> select *from time;
+        +--------+------+
+        | timeid | year |
+        +--------+------+
+        | 1 | 2016 |
+        | 2 | 2017 |
+        | 3 | 2018 |
+        +--------+------+
+        1. SELECT T.year,L.state,SUM(S.sales)
+         FROM sales S, time T, locations L
+         WHERE S.timeid=T.timeid and S.locid=L.locid
+         GROUP BY T.year, L.state;
+         +------+-------+--------------+
+        | year | state | SUM(S.sales) |
+        +------+-------+--------------+
+        | 2016 | CA | 81 |
+        | 2016 | W1 | 63 |
+        | 2017 | CA | 107 |
+        | 2017 | W1 | 38 |
+        | 2018 | CA | 35 |
+        | 2018 | W1 | 75 |
+    
+        2. SELECT T.year,SUM(S.sales)
+         FROM sales S, time T
+         WHERE S.timeid=T.timeid
+         GROUP BY T.year;
+         +------+--------------+
+        | year | SUM(S.sales) |
+        +------+--------------+
+        | 2016 | 144 |
+        | 2017 | 145 |
+        | 2018 | 110 |
+        +------+--------------+
+         3. SELECT L.state,SUM(S.sales)
+         FROM sales S, locations L
+         WHERE S.locid=L.locid
+         GROUP BY L.state;
+        +-------+--------------+
+        | state | SUM(S.sales) |
+        +-------+--------------+
+        | CA | 223 |
+        | W1 | 176 |
+        +-------+--------------+
+        4. SELECT T.year,L.state,SUM(S.sales)
+         FROM sales S, time T, locations L
+         WHERE S.timeid=T.timeid and S.locid=L.locid
+         GROUP BY CUBE (T.year, L.state);
+        5. SELECT T.year,L.state,SUM(S.sales)
+         FROM sales S, time T, locations L
+         WHERE S.timeid=T.timeid and S.locid=L.locid
+         GROUP BY ROLLUP (T.year, L.state);
+    
+        +------+-------+--------------+
+        | year | state | SUM(S.sales) |
+        +------+-------+--------------+
+        | 2016 | CA | 81 |
+        | 2016 | W1 | 63 |
+        | 2016 | NULL | 144 |
+        | 2017 | CA | 107 |
+        | 2017 | W1 | 38 |
+        | 2017 | NULL | 145 |
+        | 2018 | CA | 35 |
+        | 2018 | W1 | 75 |
+        | 2018 | NULL | 110 |
+        | NULL | NULL | 399 |
+
+
+        ---Grant N Revoke---
+        Granting SELECT Privilege to a User in a Table: To grant Select Privilege to a table named “users” where User Name is Amit, the following GRANT statement should be executed.
+        GRANT SELECT ON Users TO'Amit'@'localhost;
+
+        Revoking SELECT Privilege to a User in a Table: To revoke Select Privilege to a table named “users” where User Name is Amit, the following revoke statement should be executed.
+        REVOKE SELECT ON  users FROM 'Amit'@localhost'; 
+    </pre>
+
+</body>
+
+</html>
