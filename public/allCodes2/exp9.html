@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Q9) Student (rollno, name, marks)</h2>
+    <pre>
+        1) Insert at least 5 records with meaningful data.
+
+        db.student.insertOne({rollno:1,name:"Yash",marks:60})
+        db.student.insertOne({rollno:2,name:"Harsh",marks:65})
+        db.student.insertOne({rollno:3,name:"Rajveer",marks:70})
+        db.student.insertOne({rollno:4,name:"Shreyash",marks:75})
+        db.student.insertOne({rollno:5,name:"Avishkar",marks:75})
+        db.student.insertOne({rollno:6,name:"Shivani",marks:80})
+        db.student.insertOne({rollno:7,name:"Rajlaxmi",marks:85})
+        db.student.insertOne({rollno:8,name:"Sahil",marks:85})
+        db.student.insertOne({rollno:9,name:"Ram",marks:80})
+
+        2) Display all students.
+
+        db.student.find()
+
+        3) Find the students having marks >70.
+
+        db.student.find({marks:{$gt:70}})
+
+        4) Display students name having marks between 80 and 90.
+
+        db.student.find({marks:{$gt:80,$lt:90}})
+
+        5) Update the marks of “Ram” to 90.
+
+        db.student.updateOne({name:"Ram"},{$set:{marks:90}})
+
+        6) Delete the students having marks = 75.
+
+        db.student.deleteMany({marks:75})
+
+        7) Display top 2 students having highest marks.
+
+        db.student.find().sort({marks:-1}).limit(2)
+
+        8) Increment all student marks by 5%.
+
+        db.student.updateMany({},{$mul:{marks:1.05}})
+
+        9) Display student name having highest marks.
+
+        db.student.find({},{name:1,_id:0}).sort({marks:-1}).limit(1)
+    </pre>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- factorial -->
+        create or replace procedure factorial2
+        (num1 in number)
+        is
+        fact1 number:=1;
+        begin
+        for i in 1..num1 loop
+        fact1 := fact1*i;
+        end loop;
+        DBMS_OUTPUT.PUT_LINE('Factorial is ='|| fact1);
+        end factorial2;
+        /
+
+        declare
+        num1 number:= 10;
+        begin
+        factorial2(num1);
+        end;
+
+        <!-- prime -->
+        create or replace procedure findPrime
+        (num1 in number)
+        is
+        counter int:=0;
+        begin
+        for i in 2..num1/2 loop
+        if mod(num1,i)=0
+        then
+        counter:=counter+1;
+        end if;
+        end loop;
+        if(counter>0)
+        then
+        DBMS_OUTPUT.PUT_LINE('Not a prime number');
+        else
+        DBMS_OUTPUT.PUT_LINE('prime number');
+        end if;
+        end findPrime;
+        /
+
+        declare
+        num1 number:= 11;
+        begin
+        findPrime(num1);
+        end;
+    </xmp>
+</body>
+
+</html>

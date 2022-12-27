@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+        1)Write PLSQL procedure to find greater from three numbers.
+
+        CREATE OR REPLACE PROCEDURE great (num1 NUMBER,num2 NUMBER,num3 NUMBER)
+        AS
+        
+        BEGIN
+        
+        IF(num1>num2)AND (num1>num3)
+        THEN
+            dbms_output.put_line('The Greatest Number is:'||num1);
+        ELSIF(num2>num1)AND (num2>num3)
+        THEN
+            dbms_output.put_line('The Greatest Number is:'||num2);
+        ELSE
+            dbms_output.put_line('The Greatest Number is:'||num3);
+         END IF;
+        
+        END;
+        
+        EXECUTE great(13,34,12);
+        
+        
+        2)Write a cursor that will increase salary by 10% if salary is > 10000 otherwise by 5%.
+        
+        
+        DECLARE 
+            empid emp.eid % type; 
+            esal emp.salary % type; 
+            
+         CURSOR s1 is select eid,salary from emp; 
+         
+        BEGIN 
+            open s1; 
+            loop  
+                fetch s1 into empid,esal; 
+                if(esal>10000) 
+                then 
+                    esal:=esal*1.06; 
+                else 
+                    esal:= esal*1.05; 
+                end if; 
+                update emp set salary=esal where eid=empid ; 
+                exit when s1 % notfound; 
+            end loop; 
+            close s1; 
+        end;
+        </pre>
+</body>
+
+</html>

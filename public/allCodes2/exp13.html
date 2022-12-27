@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Employee (empid, name, salary, deptname)</h1>
+    <pre>
+        1.	Find the name of employees having salary 25000.
+
+        db.Employee1.find({salary:25000})
+
+        2.	Display employees in descending order of salary.
+
+        db.Employee1.find().sort({salary:-1})
+
+        3.	Display top 2 employees having highest salary.
+
+        db.Employee1.find().sort({salary:-1}).limit(2)
+
+        4.	Find maximum salary.
+
+        db.Employee1.find({},{salary:1,_id:0}).sort({salary:-1}).limit(1)
+
+        5.	Increment all employee salary by 6%.
+
+        db.Employee1.updateMany({},{$mul:{salary:1.06}})
+
+        6.	Display employee name and salary
+
+        db.Employee1.find({},{name:1,salary:1,_id:0})
+
+        7.	Delete documents of Chemical department.
+
+        db.Employee1.deleteMany({deptname:"Chemical"})
+
+        8.	Display salary and department name of  “Ram”.
+
+        db.Employee1.find({name:"Ram"},{salary:1,deptname:1,_id:0})
+    </pre>
+</body>
+</html>

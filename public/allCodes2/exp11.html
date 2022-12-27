@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        1) Insert Data 
+
+        db.student1.insertOne({rollno:1,name:"Harsh",marks:60,deptname:"Mech",city:"Pune"})
+        db.student1.insertOne({rollno:2,name:"Yash",marks:65,deptname:"Civil",city:"Hydrebad"})
+        db.student1.insertOne({rollno:3,name:"Rajveer",marks:70,deptname:"Entc",city:"Mumbai"})
+        db.student1.insertOne({rollno:4,name:"Ram",marks:75,deptname:"Cse",city:"Kolhapur"})
+        db.student1.insertOne({rollno:5,name:"Krishna",marks:80,deptname:"Mech",city:"Solapur"})
+        db.student1.insertOne({rollno:6,name:"Shreyash",marks:85,deptname:"Cse",city:"Kolhapur"})
+        db.student1.insertOne({rollno:7,name:"Rajlaxmi",marks:90,deptname:"Civil",city:"Pune"})
+
+        1.	Display document of roll no. 1
+
+        db.student1.find({rollno:1})
+
+        2.	Display marks of “Ram”.
+
+        db.student1.find({name:"Ram"},{marks:1,_id:0})
+
+        3.	Display student having highest marks.
+
+        db.student1.find().sort({marks:-1}).limit(1);
+
+        4.	Display students having marks greater than 70. 
+
+        db.student1.find().sort({marks:-1}).limit(1);
+
+        5.	Modify city of “Krishna” to “Pune”.
+
+        db.student1.updateOne({name:"Krishna"},{$set:{city:"Pune"}})
+
+        6.	Display maximum marks of each department.
+
+        db.student1.aggregate([{$group:{_id:"$deptname",MaxMarks:{$max:"$marks"}}}])
+
+        7.	Display city of students having roll no. 10 to 20.
+
+        db.student1.find({rollno:{$gte:2,$lte:5}},{city:1,_id:0})
+
+        8.	Display student collection in descending order of marks.
+
+        db.student1.find().sort({marks:-1})
+
+        9.	Delete document of roll no. 5.
+
+        db.student1.deleteOne({rollno:5})
+
+
+
+    </pre>
+</body>
+</html>

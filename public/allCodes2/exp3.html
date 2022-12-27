@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+        <!-- Server prog -->
+        import java.io.*;
+import java.net.*;
+import java.sql.*;
+import java.util.*;
+
+public class semiJoinServer {
+
+  public static void main(String srgs[]) {
+    DataInputStream dis;
+    DataOutputStream dos;
+    InputStream is;
+    OutputStream os;
+    Scanner s1 = new Scanner(System.in);
+    System.out.println("Server Started");
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost/depositor_semijoin?autoReconnect=true&useSSL=false",
+        "root",
+        "password"
+      );
+      System.out.println("Connection Established");
+      Statement st = con.createStatement();
+      Statement st1 = con.createStatement();
+      ServerSocket s = new ServerSocket(1520);
+      Socket s2 = s.accept();
+      is = s2.getInputStream();
+      os = s2.getOutputStream();
+      dis = new DataInputStream(is);
+      dos = new DataOutputStream(os);
+      int count = 0;
+      int accno;
+      count = dis.readInt();
+      for (int i = 0; i < count; i++) {
+        accno = dis.readInt();
+        st.executeUpdate("insert into temp1 values(" + accno + ");");
+      }
+      ResultSet rs1 = st.executeQuery(
+        "select * from depositor natural join temp1"
+      );
+      int count1 = 0;
+      while (rs1.next()) {
+        int accno1 = rs1.getInt(1);
+        String cname = rs1.getString(2);
+        st1.executeUpdate(
+          "insert into temp2 values(" + accno1 + ",'" + cname + "')"
+        );
+        System.out.println(accno1 + "\t" + cname);
+        count1++;
+      }
+      dos.writeInt(count1);
+      ResultSet rs2 = st.executeQuery("select * from temp2");
+      while (rs2.next()) {
+        int accno1 = rs2.getInt(1);
+        String cname = rs2.getString(2);
+        dos.writeInt(accno1);
+        dos.writeUTF(cname);
+      }
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+}
+
+
+
+     <!--Client Prog  -->
+     import java.io.*;
+import java.net.*;
+import java.sql.*;
+import java.util.*;
+
+public class semiJoinClient {
+
+  public static void main(String args[]) {
+    DataInputStream dis;
+    DataOutputStream dos;
+    InputStream is;
+    OutputStream os;
+    Statement st, st1, st2, st3;
+    Scanner sl = new Scanner(System.in);
+    System.out.println("CLient side");
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost/account_semijoin",
+        "root",
+        "password"
+      );
+      st = con.createStatement();
+      st1 = con.createStatement();
+      System.out.println("Database connected");
+      Socket s = new Socket("192.168.0.104", 1520);
+      is = s.getInputStream();
+      os = s.getOutputStream();
+      dis = new DataInputStream(is);
+      dos = new DataOutputStream(os);
+      System.out.println("Connection established with server");
+      int count1 = 0;
+      ResultSet rsl = st.executeQuery("select accno from account");
+      while (rsl.next()) {
+        int accno = rsl.getInt(1);
+        System.out.println(accno + "\t");
+        st1.executeUpdate("insert into temp1 values(" + accno + ")");
+        count1++;
+      }
+      dos.writeInt(count1);
+      ResultSet rsl1 = st.executeQuery("select accno from temp1");
+      while (rsl1.next()) {
+        int accno = rsl1.getInt(1);
+        dos.writeInt(accno);
+      }
+      int count2 = 0;
+      count2 = dis.readInt();
+      for (int i = 0; i < count2; i++) {
+        int accno = dis.readInt();
+        String cname = dis.readUTF();
+        st.executeUpdate(
+          "insert into temp2 values(" + accno + ",'" + cname + "')"
+        );
+      }
+      ResultSet rs3 = st.executeQuery(
+        "select * from account natural join temp2"
+      );
+      while (rs3.next()) {
+        int accno = rs3.getInt(1);
+        String bname = rs3.getString(2);
+        int bal = rs3.getInt(3);
+        String cname = rs3.getString(4);
+        System.out.println(accno + "\t" + bname + "\t" + bal + "\t" + cname);
+        st1.executeUpdate(
+          "insert into rssemi values(" +
+          accno +
+          ",'" +
+          bname +
+          "'," +
+          bal +
+          ",'" +
+          cname +
+          "')"
+        );
+      }
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+}
+
+    </xmp>
+</body>
+</html>

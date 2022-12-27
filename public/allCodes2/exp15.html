@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Student (rollno, name, marks)</h2>
+    <pre>
+        1. Display document of "Ram"
+
+        db.student.find({name:"Ram"})
+
+        2. Marks greater than 80 and less than 90
+
+        db.student.find({marks:{$gt:80,$lt:90}})
+
+        3.	Display name and marks of students having marks equal or greater than 80 and < 90
+
+        db.student.find({marks:{$gte:80,$lt:90}},{name:1,marks:1,_id:0})
+
+        4.	Display name and marks of student having rollno. 1
+
+        db.student.find({rollno:1},{name:1,marks:1,_id:0})
+
+        5.	Display documents in ascending order of name
+
+        db.student.find().sort({name:1})
+
+        6.	Display first 2 documents
+
+        db.student.find().limit(2);
+
+        7.	Display document of Ram or rollno 3
+
+        db.student.find({$or:[{name:"Ram"},{rollno:3}]})
+
+        8.	Display document of Ram and rollno 1
+
+        db.student.find({name:"Ram",rollno:1})
+
+        9.	Display all in documents in descending order of Marks
+
+        db.student.find().sort({marks:-1})
+
+        10.	Display name and marks of student having highest marks
+
+        db.student.find({},{name:1,marks:1,_id:0}).sort({marks:-1}).limit(1)
+
+
+
+    </pre>
+</body>
+</html>

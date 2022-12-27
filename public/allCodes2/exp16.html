@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+        //1. Display document of "Ram"
+{
+   "selector": {
+      "name": "Ram"
+   }
+}
+
+
+//2. salary greater than 20000 and less than 30000
+{
+   "selector": {
+      "salary": {
+         "$gt": "20000",
+         "$lt": "30000"
+      }
+   }
+}
+
+//3. Display name and department name of employees having salary equal or greater than 10000 and < 15000
+{
+   "selector": {
+      "salary": {
+         "$gte": "10000",
+         "$lt": "15000"
+      }
+   },
+   "fields": [
+      "name",
+      "deptname"
+   ]
+}
+
+//4. Display name and salary of employee having empid 1
+{
+   "selector": {
+      "empid": "1"
+   },
+   "fields": [
+      "name",
+      "salary"
+   ]
+}
+
+
+//5.Display documents in ascending order of name
+
+// First Create index (Click on manage index and then implement)
+{
+   "index": {
+      "fields": [
+         "name"
+      ]
+   },
+   "name": "nameindex",
+   "type": "json"
+}
+//5.Display documents in ascending order
+{
+   "selector": {},
+ 
+   "sort": [
+      "name"
+   ]
+}
+
+
+//6. Display first 2 documents
+{
+   "selector": {},
+   "fields": [
+      "name",
+      "salary"
+   ],
+   "limit": 2
+}
+
+//7. Display document of Ram or rollno 3
+{
+   "selector": {
+      "$or": [
+         {
+            "name": "Ram"
+         },
+         {
+            "empid": 3
+         }
+      ]
+   }
+}
+
+
+
+//8. Display all in documents in descending order of name
+{
+   "selector": {},
+   "sort": [
+      {
+         "name": "desc"
+      }
+   ]
+}
+
+//9. Display name and salary of employee having highest salary.
+// First Create index on salary(Click on manage index and then implement)
+{
+   "index": {
+      "fields": [
+         "salary"
+      ]
+   },
+   "name": "salary",
+   "type": "json"
+}
+// then execute this
+{
+   "selector": {},
+   "fields": [
+      "name",
+      "salary"
+   ],
+   "sort": [
+      {
+         "salary": "desc"
+      }
+   ],
+   "limit": 1
+}
+
+//10. Display department having highest salary.
+{
+   "selector": {},
+   "fields": [
+      "deptname"
+   ],
+   "sort": [
+      {
+         "salary": "desc"
+      }
+   ],
+   "limit": 1
+}
+
+    </pre>
+</body>
+
+</html>

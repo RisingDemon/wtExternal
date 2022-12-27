@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+        1)Write PLSQL Procedure to find reverse of given number.
+
+CREATE OR REPLACE PROCEDURE revereNum(num Number) 
+AS 
+temp Number:=num; 
+ans Number:=0; 
+-- temp Number:=0; 
+BEGIN 
+WHILE temp>0 
+LOOP 
+    ans:=(ans*10)+mod(temp,10); 
+    temp:=floor(temp/10); 
+END LOOP; 
+DBMS_OUTPUT.PUT_LINE('The Reversed Number is:'||ans); 
+END; 
+
+
+EXECUTE revereNum(321)
+
+
+
+2)Write PLSQL function to find factorial of given number.
+
+
+CREATE OR REPLACE FUNCTION fact (num NUMBER)  
+RETURN NUMBER IS 
+ans NUMBER :=1;  
+BEGIN  
+FOR k in 1..num  
+LOOP  
+ans:=ans*k;  
+END LOOP;  
+return ans; 
+END;
+
+
+BEGIN 
+dbms_output.put_line(fact(5)); 
+END;
+    </pre>
+</body>
+
+</html>

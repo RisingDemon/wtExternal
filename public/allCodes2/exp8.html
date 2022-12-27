@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Q8)Employee (empid, name, salary, designation)</h3>
+    <pre>
+        1)Inserting Entires into database:
+        
+        db.Employee.insertOne({empid:1,name:"Shreyash",salary:45000,designation:"supervisor"})
+        db.Employee.insertOne({empid:3,name:"Rajalxmi",salary:53000,designation:"Asst.prof"})
+        db.Employee.insertOne({empid:5,name:"Sahil",salary:50000,designation:"Senior.prof"})
+        db.Employee.insertOne({empid:7,name:"Avishkar",salary:45000,designation:"supervisor"})
+        db.Employee.insertOne({empid:11,name:"Shivani",salary:45000,designation:"supervisor"})
+        db.Employee.insertOne({empid:2,name:"Rohan",salary:15000,designation:"Lab.Ass"})
+        db.Employee.insertOne({empid:4,name:"Mohan",salary:25000,designation:"senior.Lab.Ass"})
+
+        2) Display all employees:
+
+           db.Employee.find()
+
+        3) Find the employees whose salary is >10000:
+
+           db.Employee.find({salary:{$gt:10000}})
+
+        4) Display the employee name whose having salary  either 15000 or 25000
+
+           db.Employee.find({$or:[{salary:15000},{salary:25000}]})
+
+        5) Update designation of employee 11 to ‘Asst. Prof.’
+
+           db.Employee.updateOne({empid:11},{$set:{designation:"Asst.Prof"}})
+
+        6) Delete the employees having designation “supervisor”.
+
+           db.Employee.deleteMany({designation:"supervisor"});
+
+        7) Display top 2 employees having highest salary.
+
+           db.Employee.find().sort({salary:-1}).limit(2)
+
+        8) Increment all employee salary by 1000.
+
+           db.Employee.updateMany({},{$inc:{salary:1000}})
+
+        9) Increment all employee salary by 6%.
+
+           db.Employee.updateMany({},{$mul:{salary:1.06}})
+
+
+        
+    </pre>
+</body>
+</html>

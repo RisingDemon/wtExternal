@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        Inserting Values in Document:
+
+        db.Employee1.insertOne({empid:101,name:"Ram",salary:10000,deptname:"Mech"})
+        db.Employee1.insertOne({empid:102,name:"Krishna",salary:20000,deptname:"Cse"})
+        db.Employee1.insertOne({empid:103,name:"Yash",salary:25000,deptname:"Cse"})
+        db.Employee1.insertOne({empid:104,name:"Shreyash",salary:30000,deptname:"Mech"})
+        db.Employee1.insertOne({empid:105,name:"Sahil",salary:35000,deptname:"Entc"})
+        db.Employee1.insertOne({empid:106,name:"Rajlaxmi",salary:40000,deptname:"Civil"})
+        db.Employee1.insertOne({empid:107,name:"Avishkar",salary:45000,deptname:"Entc"})
+        db.Employee1.insertOne({empid:108,name:"Avishkar",salary:50000,deptname:"Civil"})
+
+
+       1) Find employees of CSE departname.
+
+       db.Employee1.find({deptname:"Cse"})
+
+       2. Find the name of employees having salary 20000.
+
+       db.Employee1.find({salary:{$gt:20000}})
+
+       3. Find salary of ‘Ram”
+
+       db.Employee1.find({name:"Ram"},{salary:1,_id:0})
+
+       4. Find department name of ‘Krishna”
+
+       db.Employee1.find({name:"Krishna"},{deptname:1,_id:0})
+
+       5. Update department of Krishna to ETC.
+
+       db.Employee1.updateOne({name:"Krishna"},{$set:{deptname:"Entc"}})
+
+       6. Increment salary by 1000
+
+       db.Employee1.updateMany({},{$inc:{salary:10000}})
+
+       7. dbDelete document of “Ram”
+
+       db.Employee1.deleteOne({name:"Ram"})
+
+       8. Find total employees of each department.
+
+       db.Employee1.aggregate([{$group:{_id:"$deptname",TotalStud:{$sum:1}}}])
+
+    </pre>
+</body>
+</html>

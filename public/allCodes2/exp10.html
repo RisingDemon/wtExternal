@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Q10) Account (accno, branchname, balance)</h3>
+    <pre>
+        1) Insert at least 6 records with meaningful data.
+
+        db.account.insertOne({accno:101,branchname:"Tarabai Park",balance:10000})
+        db.account.insertOne({accno:102,branchname:"Nagala Park",balance:15000})
+        db.account.insertOne({accno:103,branchname:"Bawda",balance:20000})
+        db.account.insertOne({accno:104,branchname:"New Shahupuri",balance:25000})
+        db.account.insertOne({accno:105,branchname:"Rajaram Puri",balance:30000})
+        db.account.insertOne({accno:105,branchname:"Takala",balance:35000})
+        db.account.insertOne({accno:105,branchname:"Shahupuri",balance:33000})
+
+        2) Display all accounts.
+
+        db.account.find()
+
+        3) Find the accounts having balance >25000.
+
+        db.account.find({balance:{$gt:25000}})
+
+        4) Display account numbers having balance between 25000 and 35000.
+
+        db.account.find({balance:{$gt:25000,$lt:35000}})
+
+        5) Update the balance of  accno. 101 to 35000.
+
+        db.account.updateOne({accno:101},{$set:{balance:35000}})
+
+        6) Delete the accounts having balance 15000.
+
+        db.account.deleteMany({balance:15000})
+
+        7) Display top 2 accounts having highest balance.
+
+        db.account.find().sort({balance:-1}).limit(2)
+
+        8) Display total balance for each branch.
+
+        db.account.find({},{branchname:1,balance:1,_id:0})
+
+        9) Display branch name having balance 20000.
+
+        db.account.find({balance:20000},{branchname:1,_id:0})
+
+
+
+
+    </pre>
+</body>
+</html>

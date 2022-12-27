@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <xmp>
+
+        --- Server code ---
+        import java.io.*;
+        import java.net.*;
+        import java.sql.*;
+        import java.util.*;
+
+        public class vfs {
+
+        public static void main(String args[]) {
+        DataInputStream dis;
+        DataOutputStream dos;
+        InputStream is;
+        OutputStream os;
+        Scanner s1 = new Scanner(System.in);
+        System.out.println("Server Started");
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost/test2?autoReconnect=true&useSSL=false",
+        "root",
+        "password"
+        );
+        System.out.println("Connection Established");
+        Statement st = con.createStatement();
+        ServerSocket s = new ServerSocket(1520);
+        Socket s2 = s.accept();
+        is = s2.getInputStream();
+        os = s2.getOutputStream();
+        dis = new DataInputStream(is);
+        dos = new DataOutputStream(os);
+        int count = 0;
+        String rw = new String(dis.readUTF());
+        System.out.println(rw);
+        ResultSet rs1 = st.executeQuery(rw);
+        while (rs1.next()) {
+        int id = rs1.getInt(1);
+        String nm = rs1.getString(2);
+        System.out.println(id + "\t" + nm);
+        count++;
+        }
+        dos.writeInt(count);
+        String nm;
+        int id;
+        ResultSet rs2 = st.executeQuery(rw);
+        while (rs2.next()) {
+        id = rs2.getInt(1);
+        nm = rs2.getString(2);
+        dos.writeInt(id);
+        dos.writeUTF(nm);
+        }
+        } catch (Exception e) {
+        System.out.println(e);
+        }
+        }
+        }
+
+
+
+        ---Client code---
+        import java.io.*;
+        import java.net.*;
+        import java.sql.*;
+        import java.util.*;
+
+        public class vfs {
+
+        public static void main(String args[]) {
+        DataInputStream dis;
+        DataOutputStream dos;
+        InputStream is;
+        OutputStream os;
+        Statement st, st1, st2, st3;
+        Scanner s1 = new Scanner(System.in);
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost/test2",
+        "root",
+        "password"
+        );
+        st = con.createStatement();
+        Socket s = new Socket("192.168.0.114", 1520);
+        is = s.getInputStream();
+        os = s.getOutputStream();
+        dis = new DataInputStream(is);
+        dos = new DataOutputStream(os);
+        System.out.println("Enter the query");
+        String rw = s1.nextLine();
+        dos.writeUTF(rw);
+        System.out.println("Vertical fragmentation");
+        int id, sal;
+        String nm;
+        String ect;
+        int count = dis.readInt();
+        for (int i = 0; i < count; i++) { id=dis.readInt(); nm=dis.readUTF();
+            st.executeUpdate( "insert into employeekop values(" + id + ",'" + nm + "')" ); } ResultSet
+            rs1=st.executeQuery("select * from employeekop"); while (rs1.next()) { int id1=rs1.getInt(1);
+            nm=rs1.getString(2); System.out.println(id1 + "\t" + nm); } } catch (Exception e) { System.out.println(e); }
+            } } 
+
+
+            Changes that could be required
+            1. Change the IP address in the client program to the IP address of the server
+            2. Change the database name in the server program to the database name of the server
+            3. Change the database name in the client program to the database name of the server
+            4. Change the username and password in the server program to the username and password of the server
+            5. Change the username and password in the client program to the username and password of the server
+            6. Change the table name in the server program to the table name of the server
+            7. Change the table name in the client program to the table name of the server
+            8. localhost may have to be changed if it dosent work ----command to find localhost "select @@hostname"
+            9. In server prog test?autoReconnect=true&useSSL=false may not be required check it
+            10. start the project-> settings-> command pallate-> create new java project
+            10. add mysql connector to referenced libraries
+        
+        </xmp>
+</body>
+
+</html>

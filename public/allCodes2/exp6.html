@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+
+        1)Write PLSQL function to find reverse of given String.
+
+
+        CREATE OR REPLACE FUNCTION rev(word VARCHAR) 
+        RETURN VARCHAR IS 
+        len NUMBER; 
+        str1 VARCHAR(20); 
+        BEGIN 
+        len := Length(word); 
+          FOR i IN REVERSE 1.. len LOOP            
+            str1 := str1|| Substr(word, i, 1); 
+          END LOOP; 
+          return str1; 
+        END;
+        
+        
+        
+        BEGIN 
+        dbms_output.put_line(rev('Shreyash')); 
+        END;
+        
+        
+        2)Write PLSQL procedure to find average of given numbers.
+        
+        
+        CREATE OR REPLACE PROCEDURE findAvg(num1 NUMBER,num2 NUMBER, num3 NUMBER) 
+        AS 
+        sumNum Number; 
+        ans NUMBER(10,4); 
+        BEGIN 
+            sumNum:=num1+num2+num3; 
+            ans:=sumNum/3; 
+            dbms_output.put_line(ans); 
+        END; 
+        
+        execute findAvg(12,33,56)
+    </pre>
+</body>
+
+</html>
