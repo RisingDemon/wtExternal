@@ -1,3 +1,10 @@
+// button for coding club
+const btnCC = document.getElementById("btnCC");
+btnCC.addEventListener("click", function () {
+    window.location.href = 'https://forms.gle/phpUT92s8Dmux5pn9';
+});
+
+
 const btn1 = document.getElementById("btn");
 btn1.addEventListener("click", function () {
     window.location.href = `./allCodes/exp1.html`;
